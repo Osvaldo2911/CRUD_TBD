@@ -4,12 +4,12 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import Modelo.ClienteT;
+import Modelo.UsuarioT;
 
 @Dao
-public interface UsuarioDAO {
+public interface clienteDAO {
 
-    @Query("SELECT * FROM UsuarioT WHERE nombre=:nombreEntrada AND userName=:nomUser AND contraseña=:con")
+    @Query("SELECT * FROM ClienteT WHERE nombre=:nombreEntrada AND userName=:nomUser AND contraseña=:con")
     public UsuarioT buscarUsuario(String nombreEntrada, String nomUser, String con);
 
     //Altas
@@ -21,5 +21,4 @@ public interface UsuarioDAO {
 
     @Query("update UsuarioT set nombre=:nombreN,userName=:nomUser,contraseña=:con where userName=:nomUser")
     public UsuarioT modificarUsuario(String nombreN, String nomUser, String con);
-
 }
