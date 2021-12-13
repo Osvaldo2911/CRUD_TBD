@@ -1,6 +1,7 @@
 package ConexionBD;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Region;
 
 import androidx.room.Database;
@@ -31,10 +32,9 @@ public abstract class Conexion extends RoomDatabase {
         if(INSTANCE==null){
 
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                    Conexion.class,"@dreamhome").addCallback(CALLBACK).build();
+                    Conexion.class,"@Connexion").addCallback(CALLBACK).build();
         }
         //*--*
-
 
      return INSTANCE;
     }
