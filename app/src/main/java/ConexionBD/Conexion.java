@@ -30,9 +30,39 @@ public abstract class Conexion extends RoomDatabase {
 
         //*--*
         if(INSTANCE==null){
+            //uso de transacciones
+                /*
+            CALLBACK = new RoomDatabase.Callback(){
+                @Override
+                public void onCreate(SupportSQLiteDatabase db) {
+                    super.onCreate(db);
+
+                    // -----------------------------------------
+
+                    // Transaccion
+                    db.execSQL("BEGIN TRANSACTION");
+
+                    // Creacion de usuario
+                    db.execSQL("INSERT INTO Usuario VALUES('f', 'f')");
+
+                    // Trigger
+                    db.execSQL("CREATE TRIGGER IF NOT EXISTS baja_respaldo BEFORE DELETE ON Region BEGIN INSERT INTO Respaldo(respaldoDesc) VALUES(old.regionDesc); END;");
+
+                    // Confirmar transaccion
+                    db.execSQL("COMMIT");
+
+                    // -----------------------------------------
+
+                }
+
+                @Override
+                public void onOpen(SupportSQLiteDatabase db) {
+                    super.onOpen(db);
+                }
+            };*/
 
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                    Conexion.class,"@Connexion").addCallback(CALLBACK).build();
+                    Conexion.class,"@Dreamhome").build();
         }
         //*--*
 
