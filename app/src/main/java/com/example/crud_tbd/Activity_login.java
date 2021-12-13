@@ -49,7 +49,8 @@ public class Activity_login extends AppCompatActivity implements View.OnTouchLis
                                 Toast.LENGTH_LONG)
                                 .show();
                         //-------------------------- habre nueva ventana
-                            inicio(v);
+
+                        inicio(v);
 
                         //--------------------------
 
