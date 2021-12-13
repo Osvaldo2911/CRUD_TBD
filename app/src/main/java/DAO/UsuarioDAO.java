@@ -3,26 +3,22 @@ package DAO;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
-
-import Modelo.ClienteT;
+import Modelo.UsuarioT;
 
 @Dao
 public interface UsuarioDAO {
 
-    @Query("SELECT * FROM ClienteT WHERE nombre=:nombreEntrada AND userName=:nomUser AND contraseña=:con")
-    public ClienteT buscarUsuario(String nombreEntrada, String nomUser, String con);
+    @Query("SELECT * FROM UsuarioT WHERE nombre=:nombreEntrada AND userName=:nomUser AND contraseña=:con")
+    public UsuarioT buscarUsuario(String nombreEntrada, String nomUser, String con);
 
     //Altas
     @Insert
-    public void insertarUsuario(ClienteT alum);
+    public void insertarUsuario(UsuarioT alum);
 
-    @Query("delete from ClienteT where userName=:nomUser")
-    public ClienteT eliminarUsuario(String nomUser);
+    @Query("delete from UsuarioT where userName=:nomUser")
+    public UsuarioT eliminarUsuario(String nomUser);
 
-    @Query("update ClienteT set nombre=:nombreN,userName=:nomUser,contraseña=:con where userName=:nomUser")
-    public ClienteT modificarUsuario(String nombreN, String nomUser, String con);
-
-    @Query("SELECT * FROM ClienteT")
-    public List<ClienteT> obtenerTodos();
+    @Query("update UsuarioT set nombre=:nombreN,userName=:nomUser,contraseña=:con where userName=:nomUser")
+    public UsuarioT modificarUsuario(String nombreN, String nomUser, String con);
 
 }
