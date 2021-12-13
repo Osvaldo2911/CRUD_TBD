@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Historial {
+public class HistorialT {
     @NonNull
     String usuario;
     @NonNull
@@ -15,7 +15,7 @@ public class Historial {
     @NonNull
     String accion;
 
-    public Historial(@NonNull String usuario, @NonNull String cliente, @NonNull String fechaYhora, @NonNull String accion) {
+    public HistorialT(@NonNull String usuario, @NonNull String cliente, @NonNull String fechaYhora, @NonNull String accion) {
         this.usuario = usuario;
         this.cliente = cliente;
         this.fechaYhora = fechaYhora;
