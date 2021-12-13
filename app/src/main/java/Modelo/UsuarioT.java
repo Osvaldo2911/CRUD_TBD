@@ -1,8 +1,9 @@
 package Modelo;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
+@Entity
 public class UsuarioT {
     @NonNull
     String nombre;
@@ -12,8 +13,8 @@ public class UsuarioT {
     @NonNull
     String contraseña;
 
-    public UsuarioT(@NonNull String nombre1, @NonNull String userName, @NonNull String contraseña) {
-        this.nombre = nombre1;
+    public UsuarioT(@NonNull String nombre, @NonNull String userName, @NonNull String contraseña) {
+        this.nombre = nombre;
         this.userName = userName;
         this.contraseña = contraseña;
     }
