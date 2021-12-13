@@ -3,7 +3,7 @@ package Modelo;
 import androidx.annotation.NonNull;
 import androidx.room.PrimaryKey;
 
-public class Cliente {
+public class ClienteT {
     @PrimaryKey
     @NonNull
     String clientNo;
@@ -17,7 +17,7 @@ public class Cliente {
     @NonNull
     String maxRent;
 
-    public Cliente(@NonNull String clientNo, @NonNull String fName, @NonNull String lName, String telNo, @NonNull String prefType, @NonNull String maxRent) {
+    public ClienteT(@NonNull String clientNo, @NonNull String fName, @NonNull String lName, String telNo, @NonNull String prefType, @NonNull String maxRent) {
         this.clientNo = clientNo;
         this.fName = fName;
         this.lName = lName;

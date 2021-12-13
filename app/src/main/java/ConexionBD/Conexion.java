@@ -6,12 +6,12 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import Modelo.Cliente;
+import Modelo.ClienteT;
 import Modelo.HistorialT;
 import Modelo.UsuarioT;
 
 
-@Database(entities = {Cliente.class, UsuarioT.class, HistorialT.class},version =1,exportSchema = false)
+@Database(entities = {ClienteT.class, UsuarioT.class, HistorialT.class},version =1,exportSchema = false)
 
 public abstract class Conexion extends RoomDatabase {
 
