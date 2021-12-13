@@ -10,16 +10,16 @@ import Modelo.ClienteT;
 public interface UsuarioDAO {
 
     @Query("SELECT * FROM UsuarioT WHERE nombre=:nombreEntrada AND userName=:nomUser AND contraseña=:con")
-    public UsuarioT buscarUsuario(String nombreEntrada, String nomUser, String con);
+    public ClienteT buscarUsuario(String nombreEntrada, String nomUser, String con);
 
     //Altas
     @Insert
-    public void insertarUsuario(UsuarioT alum);
+    public void insertarUsuario(ClienteT alum);
 
     @Query("delete from UsuarioT where userName=:nomUser")
-    public UsuarioT eliminarUsuario(String nomUser);
+    public ClienteT eliminarUsuario(String nomUser);
 
     @Query("update UsuarioT set nombre=:nombreN,userName=:nomUser,contraseña=:con where userName=:nomUser")
-    public UsuarioT modificarUsuario(String nombreN, String nomUser, String con);
+    public ClienteT modificarUsuario(String nombreN, String nomUser, String con);
 
 }
