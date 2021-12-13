@@ -31,9 +31,7 @@ public abstract class Conexion extends RoomDatabase {
         if(INSTANCE==null){
 
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                    Conexion.class,"@northwind").addCallback(CALLBACK).build();
-            /*INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                    Northwind.class,"@northwind").build();*/
+                    Conexion.class,"@dreamhome").addCallback(CALLBACK).build();
         }
         //*--*
 
