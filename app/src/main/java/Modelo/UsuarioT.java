@@ -3,7 +3,7 @@ package Modelo;
 import androidx.annotation.NonNull;
 import androidx.room.PrimaryKey;
 
-public class Usuario {
+public class UsuarioT {
     @NonNull
     String nombre;
     @PrimaryKey
@@ -12,8 +12,8 @@ public class Usuario {
     @NonNull
     String contraseña;
 
-    public Usuario(@NonNull String nombre, @NonNull String userName, @NonNull String contraseña) {
-        this.nombre = nombre;
+    public UsuarioT(@NonNull String nombre1, @NonNull String userName, @NonNull String contraseña) {
+        this.nombre = nombre1;
         this.userName = userName;
         this.contraseña = contraseña;
     }
