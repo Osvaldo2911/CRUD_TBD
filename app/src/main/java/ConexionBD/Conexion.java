@@ -19,5 +19,17 @@ import Modelo.Usuario;
 
 public abstract class Conexion extends RoomDatabase {
 
+    private static Conexion INSTANCE;
+
+    private static RoomDatabase.Callback CALLBACK = null;
+
+    public static Conexion gettAppDatabase(Context context){
+
+     return INSTANCE;
+    }
+
+    public static void destroyInstance(){
+        INSTANCE=null;
+    }
 
 }
