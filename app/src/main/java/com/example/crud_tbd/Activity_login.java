@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import ConexionBD.Conexion;
+import Modelo.UsuarioT;
+
 public class Activity_login extends AppCompatActivity implements View.OnTouchListener {
     TextView a;
     EditText user,contra;
@@ -33,40 +36,24 @@ public class Activity_login extends AppCompatActivity implements View.OnTouchLis
         contra = findViewById(R.id.et_ps_contra);
         iniciar = findViewById(R.id.btn_iniciar);
 
-        iniciarSesion.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                int n = 0;
-                if (!(user.getText().toString().trim().equals(""))){
-                    n= n+1;
-                }
-                if (!(user.getText().toString().trim().equals(""))){
-                    n= n+1;
-                }
-                if (n==2){
-                    //Inicio de la aplicacion
-                        Toast.makeText(getApplicationContext(),
-                                "Inicio con exito",
-                                Toast.LENGTH_LONG)
-                                .show();
-                        //-------------------------- habre nueva ventana
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Conexion conexion = Conexion.gettAppDatabase(getBaseContext());
+                iniciarSesion.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String us = user.getText().toString().trim();
+                        String cn = contra.getText().toString().trim();
+                        UsuarioT a = conexion.usuarioDAO().buscarUsuario("us","cn");
+                        if(a!=null){
+                            inicio(v);
+                        }
 
-                        inicio(v);
-
-                        //--------------------------
-
-
-                        n=0;
-                }else{
-                    Toast.makeText(getApplicationContext(),
-                            "Inicio fallido",
-                            Toast.LENGTH_LONG)
-                            .show();
-                    n=0;
-                }
+                    }
+                });
             }
         });
-
-        //-------------------
 
     }
 

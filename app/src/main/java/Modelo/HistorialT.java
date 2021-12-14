@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey;
 public class HistorialT {
     @NonNull
     String usuario;
+    @PrimaryKey
     @NonNull
     String cliente;
     @NonNull

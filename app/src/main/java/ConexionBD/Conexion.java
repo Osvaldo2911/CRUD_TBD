@@ -6,7 +6,9 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import DAO.UsuarioDAO;
+import DAO.clienteDAO;
+import DAO.historialDAO;
+import DAO.usuarioDAO;
 import Modelo.ClienteT;
 import Modelo.HistorialT;
 import Modelo.UsuarioT;
@@ -16,11 +18,13 @@ import Modelo.UsuarioT;
 
 public abstract class Conexion extends RoomDatabase {
 
-    public abstract UsuarioDAO usuarioDAO();
+    public abstract usuarioDAO usuarioDAO();
+    public abstract clienteDAO clienteDAO();
+    public abstract historialDAO historialDAO();
 
     private static Conexion INSTANCE;
 
-    private static RoomDatabase.Callback CALLBACK = null;
+    //private static RoomDatabase.Callback CALLBACK = null;
 
     public static Conexion gettAppDatabase(Context context){
 
