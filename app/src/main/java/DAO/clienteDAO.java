@@ -5,6 +5,8 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import java.util.List;
+
 import Modelo.ClienteT;
 
 @Dao
@@ -26,6 +28,6 @@ public interface clienteDAO {
     @Query("SELECT * FROM ClienteT")
     public List<ClienteT> obtenerTodos();
 
-    @Query("Select * from ClienteT where ClientNo LIKE '%\"' + ClientNo=:clientNo + '\"%' AND fName LIKE '%\"' + fName=:fName + '\"%' AND lName LIKE '%\"' + lName=:lName+' \"%' AND telNo LIKE '%\" '+ telNo=:telNo + '\"%' AND prefType LIKE '%\" '+ prefType=:prefType +' \"%' AND maxRent LIKE '%\"' + maxRent=:maxRent +' \"%';")
-    public List<ClienteT> obtenerTodosPersonalizado(String clientNo, String fName, String lName, String telNo, String prefType, String maxRent);
+    @Query("Select * from ClienteT where ClientNo LIKE '%' + ClientNo=:clientNo + '%' AND fName LIKE '%' + fName=:fName + '%' AND lName LIKE '%' + lName=:lName+'%' AND telNo LIKE '%'+ telNo=:telNo + '%' AND prefType LIKE '%'+ prefType=:prefType +'%' AND maxRent LIKE '%' + maxRent=:maxRent +'%';")
+    public List<ClienteT> obtenerPersonalizado(String clientNo, String fName, String lName, String telNo, String prefType, String maxRent);
 }
