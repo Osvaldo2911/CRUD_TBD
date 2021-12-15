@@ -36,30 +36,16 @@ public class Activity_login extends AppCompatActivity implements View.OnTouchLis
         contra = findViewById(R.id.et_ps_contra);
         iniciar = findViewById(R.id.btn_iniciar);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Conexion conexion = Conexion.gettAppDatabase(getBaseContext());
-                iniciarSesion.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String us = user.getText().toString().trim();
-                        String cn = contra.getText().toString().trim();
-                        UsuarioT a = conexion.usuarioDAO().buscarUsuario("us","cn");
-                        if(a!=null){
-                            inicio(v);
-                        }
-
-                    }
-                });
-            }
-        });
-
     }
 
         public void inicio(View v){
-            Intent i = new Intent(this,Activity_inicio.class);
-            startActivity(i);
+        String userid = user.getText().toString().trim();
+        String contra = user.getText().toString().trim();
+            if (!(userid.equals("")) && !(contra.equals(""))){
+                Intent i = new Intent(this,Activity_inicio.class);
+                startActivity(i);
+            }
+
         }
 
 

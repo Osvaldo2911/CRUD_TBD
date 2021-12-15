@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import ConexionBD.Conexion;
 import Modelo.UsuarioT;
 
@@ -42,73 +44,62 @@ public class Activity_Registro extends AppCompatActivity implements View.OnTouch
         terminos = findViewById(R.id.terminosCondiciones);
 
         resultados = findViewById(R.id.lbl_resultados);
-//-------
+
+
+    }
+
+    public void registroBtn(View v){
         conexion = Conexion.gettAppDatabase(getBaseContext());
         nom = nombre.getText().toString();
         email = user.getText().toString();
         cn = contra.getText().toString().trim();
         cnc = confirmar.getText().toString().trim();
 
+        resultados.setText("nom: "+nom);
+
+        if (!nom.equals("")){
+            if (!email.equals("")){
+                if (!cn.equals("")){
+                    if (!cnc.equals("")){
+                        if (terminos.isChecked()){
+                            //--------------------------------------------------
+                            resultados.setText("Cumples todos los requisitos");
+
+                            List<UsuarioT> busqueda = conexion.usuarioDAO().usuarioDisponible(email);
+
+                            resultados.setText(busqueda.toString()+"<--tabla");
+
+                            if (busqueda == null){
+                                resultados.setText("Usuario disponible");
+                            }
+
+                            //--------------------------------------------------
+                        }else{
+                            resultados.setText("terminos no aceptados");
+                        }
+                    }else{
+                        resultados.setText("contraseña confirmar vacio");
+                    }
+                }else{
+                    resultados.setText("contraseña vacio");
+                }
+            } else{
+                resultados.setText("email vacio");
+            }
+        }else{
+            resultados.setText("nombre vacio");
+        }
 
 
 
-        //------------final
-
-    }
-
-    public void registroBtn(View v){
-
-        resultados.setText("["+nom+"] ["+email+"] ["+cn+"] ["+cnc+"]");
-
-        //----------Inicio
-
+       /*
         new Thread(new Runnable() {
             @Override
             public void run() {
 
-
-
-                /*
-                boolean datosValidos =false;
-
-                if(!nom.equals("")&& !(email.equals("")) &&!cn.equals("")&&!cnc.equals("")){
-                    if(cn.equals(cnc) && terminos.isChecked()==true){
-                        if (isEmailValid(email)){
-                            datosValidos = true;
-                        }
-                    }
-                }
-                if (datosValidos = true){
-                    //conexion.usuarioDAO().insertarUsuario(new UsuarioT("osvaldo","OS@gmail.com","12345"));
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getApplicationContext(),
-                                    "Registro con exito",
-                                    Toast.LENGTH_LONG)
-                                    .show();
-                        }
-                    });
-                }else{
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getApplicationContext(),
-                                    "Registro con fallido",
-                                    Toast.LENGTH_LONG)
-                                    .show();
-                        }
-                    });
-                }
-
-
-
-                 */
-
-
             }
-        });
-
+        }).start();
+        */
     }
     boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
@@ -121,39 +112,6 @@ public class Activity_Registro extends AppCompatActivity implements View.OnTouch
         }
         return false;
     }
-    /*
-    registro.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-        }
-        });
-
-
-            if(nom.isEmpty() && us.isEmpty() && cn.isEmpty() && cnc.isEmpty() && cn.equals(cnc) && terminos.isChecked() ){
-
-                conexion.usuarioDAO().insertarUsuario(new UsuarioT(nom,us,cn));
-
-                UsuarioT a;
-                a = conexion.usuarioDAO().buscarUsuario(us,cn);
-                Log.d("Prueba", "res = "+a.getUserName()+""+a.getContraseña()+""+a.getNombre());
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(),
-                                "Registro con exito",
-                                Toast.LENGTH_LONG)
-                                .show();
-                    }
-                });
-
-
-            }
-
-        }
-    });
-
-     */
 
 
 
