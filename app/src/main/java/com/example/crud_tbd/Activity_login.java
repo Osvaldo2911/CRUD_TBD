@@ -39,13 +39,25 @@ public class Activity_login extends AppCompatActivity implements View.OnTouchLis
     }
 
         public void inicio(View v){
+            Intent i = new Intent(this,Activity_inicio.class);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Conexion conexion = Conexion.gettAppDatabase(getBaseContext());
+
         String userid = user.getText().toString().trim();
-        String contra = user.getText().toString().trim();
-            if (!(userid.equals("")) && !(contra.equals(""))){
-                Intent i = new Intent(this,Activity_inicio.class);
-                startActivity(i);
+        String contra2 = contra.getText().toString().trim();
+            if (!(userid.equals("")) && !(contra2.equals(""))){
+                UsuarioT busqueda = conexion.usuarioDAO().usuarioLogin(userid,contra2);
+                if(busqueda!=null){
+                    startActivity(i);
+                }
+
             }
 
+
+            }
+        }).start();
         }
 
 
