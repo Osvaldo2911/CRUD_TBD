@@ -50,7 +50,7 @@ public class Activity_datos extends AppCompatActivity implements View.OnTouchLis
                 if (activo[0] == true){
                     nom.setBackgroundResource(R.drawable.filtroa);
                     nom.setTextColor(Color.WHITE);
-                    nomf = nom.getText().toString().trim();
+                    nomf = conteBus.getText().toString().trim();
                     guardarFiltro(nomf,0);
                     conteBus.setText("");
 
@@ -70,7 +70,7 @@ public class Activity_datos extends AppCompatActivity implements View.OnTouchLis
                 if (activo[1] == true){
                     ap.setBackgroundResource(R.drawable.filtroa);
                     ap.setTextColor(Color.WHITE);
-                    apf = ap.getText().toString().trim();
+                    apf = conteBus.getText().toString().trim();
                     guardarFiltro(apf,1);
                     conteBus.setText("");
                     activo[1] = false;
@@ -89,10 +89,15 @@ public class Activity_datos extends AppCompatActivity implements View.OnTouchLis
                 if (activo[2] == true){
                     am.setBackgroundResource(R.drawable.filtroa);
                     am.setTextColor(Color.WHITE);
+                    amf = conteBus.getText().toString().trim();
+                    guardarFiltro(amf,2);
+                    conteBus.setText("");
+                    conteBus.setText(datos[2]);
                     activo[2] = false;
                 }else if(activo[2]==false){
                     am.setBackgroundResource(R.drawable.filtrob);
                     am.setTextColor(Color.BLACK);
+                    conteBus.setText(datos[2]);
                     activo[2] = true;
                 }
             }
@@ -104,10 +109,14 @@ public class Activity_datos extends AppCompatActivity implements View.OnTouchLis
                 if (activo[3] == true){
                     fn.setBackgroundResource(R.drawable.filtroa);
                     fn.setTextColor(Color.WHITE);
+                    fnf = conteBus.getText().toString().trim();
+                    guardarFiltro(fnf,3);
+                    conteBus.setText("");
                     activo[3] = false;
                 }else if(activo[3]==false){
                     fn.setBackgroundResource(R.drawable.filtrob);
                     fn.setTextColor(Color.BLACK);
+                    conteBus.setText(datos[3]);
                     activo[3] = true;
                 }
             }
@@ -119,10 +128,14 @@ public class Activity_datos extends AppCompatActivity implements View.OnTouchLis
                 if (activo[4] == true){
                     dir.setBackgroundResource(R.drawable.filtroa);
                     dir.setTextColor(Color.WHITE);
+                    dirf = conteBus.getText().toString().trim();
+                    guardarFiltro(dirf,4);
+                    conteBus.setText("");
                     activo[4] = false;
                 }else if(activo[4]==false){
                     dir.setBackgroundResource(R.drawable.filtrob);
                     dir.setTextColor(Color.BLACK);
+                    conteBus.setText(datos[4]);
                     activo[4] = true;
                 }
             }
@@ -134,10 +147,14 @@ public class Activity_datos extends AppCompatActivity implements View.OnTouchLis
                 if (activo[5] == true){
                     suel.setBackgroundResource(R.drawable.filtroa);
                     suel.setTextColor(Color.WHITE);
+                    suelf = conteBus.getText().toString().trim();
+                    guardarFiltro(suelf,5);
+                    conteBus.setText("");
                     activo[5] = false;
                 }else if(activo[5]==false){
                     suel.setBackgroundResource(R.drawable.filtrob);
                     suel.setTextColor(Color.BLACK);
+                    conteBus.setText(datos[5]);
                     activo[5] = true;
                 }
             }
@@ -149,10 +166,14 @@ public class Activity_datos extends AppCompatActivity implements View.OnTouchLis
                 if (activo[6] == true){
                     sdni.setBackgroundResource(R.drawable.filtroa);
                     sdni.setTextColor(Color.WHITE);
+                    sdnif = conteBus.getText().toString().trim();
+                    guardarFiltro(sdnif,6);
+                    conteBus.setText("");
                     activo[6] = false;
                 }else if(activo[6]==false){
                     sdni.setBackgroundResource(R.drawable.filtrob);
                     sdni.setTextColor(Color.BLACK);
+                    conteBus.setText(datos[6]);
                     activo[6] = true;
                 }
             }
@@ -164,10 +185,14 @@ public class Activity_datos extends AppCompatActivity implements View.OnTouchLis
                 if (activo[7] == true){
                     dni.setBackgroundResource(R.drawable.filtroa);
                     dni.setTextColor(Color.WHITE);
+                    dnif = conteBus.getText().toString().trim();
+                    guardarFiltro(dnif,7);
+                    conteBus.setText("");
                     activo[7] = false;
                 }else if(activo[7]==false){
                     dni.setBackgroundResource(R.drawable.filtrob);
                     dni.setTextColor(Color.BLACK);
+                    conteBus.setText(datos[7]);
                     activo[7] = true;
                 }
             }
@@ -179,10 +204,14 @@ public class Activity_datos extends AppCompatActivity implements View.OnTouchLis
                 if (activo[8] == true){
                     dno.setBackgroundResource(R.drawable.filtroa);
                     dno.setTextColor(Color.WHITE);
+                    dnof = conteBus.getText().toString().trim();
+                    guardarFiltro(dnof,8);
+                    conteBus.setText("");
                     activo[8] = false;
                 }else if(activo[8]==false){
                     dno.setBackgroundResource(R.drawable.filtrob);
                     dno.setTextColor(Color.BLACK);
+                    conteBus.setText(datos[8]);
                     activo[8] = true;
                 }
             }
@@ -194,10 +223,14 @@ public class Activity_datos extends AppCompatActivity implements View.OnTouchLis
                 if (activo[9] == true){
                     sex.setBackgroundResource(R.drawable.filtroa);
                     sex.setTextColor(Color.WHITE);
+                    sexf = conteBus.getText().toString().trim();
+                    guardarFiltro(sexf,9);
+                    conteBus.setText("");
                     activo[9] = false;
                 }else if(activo[9]==false){
                     sex.setBackgroundResource(R.drawable.filtrob);
                     sex.setTextColor(Color.BLACK);
+                    conteBus.setText(datos[9]);
                     activo[9] = true;
                 }
             }
