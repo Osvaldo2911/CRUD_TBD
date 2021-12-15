@@ -56,7 +56,7 @@
         app:srcCompat="@drawable/agrega2" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/ed_busqueda_filtro"
         android:layout_width="194dp"
         android:layout_height="39dp"
         android:layout_marginTop="28dp"
@@ -76,7 +76,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="28dp"
         android:background="@drawable/buscar"
-        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName2"
+        app:layout_constraintStart_toEndOf="@+id/ed_busqueda_filtro"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -87,7 +87,7 @@
         android:background="@drawable/flecha"
         android:clickable="true"
         android:rotation="180"
-        app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName2"
+        app:layout_constraintEnd_toStartOf="@+id/ed_busqueda_filtro"
         app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -108,7 +108,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintTop_toBottomOf="@+id/ed_busqueda_filtro" />
 
     <TextView
         android:id="@+id/lbl_f_icono"
@@ -120,7 +120,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/lbl_filtros"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintTop_toBottomOf="@+id/ed_busqueda_filtro" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_f_opciones"
