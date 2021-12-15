@@ -10,12 +10,15 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class Activity_datos extends AppCompatActivity implements View.OnTouchListener {
-    TextView nom,ap,am,fn,dir,suel,sdni,dni,dno,sex;
+    TextView nom,ap,am,fn,dir,suel,sdni,dni,dno,sex,conteBus;
+    String nomf,apf,amf,fnf,dirf,suelf,sdnif,dnif,dnof,sexf;
     boolean activo[] = {true,true,true,true,true,true,true,true,true,true,true};
     Button agregar;
+    String[] datos = new String[9];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,7 @@ public class Activity_datos extends AppCompatActivity implements View.OnTouchLis
         contenedor2.setTranslationY(20);
         contenedor.setVisibility(View.GONE);
 
+        conteBus = findViewById(R.id.ed_busqueda_filtro);
         nom = findViewById(R.id.lbl_f_nom);
         ap = findViewById(R.id.lbl_f_ap);
         am = findViewById(R.id.lbl_f_am);
@@ -46,10 +50,15 @@ public class Activity_datos extends AppCompatActivity implements View.OnTouchLis
                 if (activo[0] == true){
                     nom.setBackgroundResource(R.drawable.filtroa);
                     nom.setTextColor(Color.WHITE);
+                    nomf = nom.getText().toString().trim();
+                    guardarFiltro(nomf,0);
+                    conteBus.setText("");
+
                     activo[0] = false;
                 }else if(activo[0]==false){
                     nom.setBackgroundResource(R.drawable.filtrob);
                     nom.setTextColor(Color.BLACK);
+                    conteBus.setText(datos[0]);
                     activo[0] = true;
                 }
             }
@@ -61,10 +70,14 @@ public class Activity_datos extends AppCompatActivity implements View.OnTouchLis
                 if (activo[1] == true){
                     ap.setBackgroundResource(R.drawable.filtroa);
                     ap.setTextColor(Color.WHITE);
+                    apf = ap.getText().toString().trim();
+                    guardarFiltro(apf,1);
+                    conteBus.setText("");
                     activo[1] = false;
                 }else if(activo[1]==false){
                     ap.setBackgroundResource(R.drawable.filtrob);
                     ap.setTextColor(Color.BLACK);
+                    conteBus.setText(datos[1]);
                     activo[1] = true;
                 }
             }
@@ -224,6 +237,9 @@ public class Activity_datos extends AppCompatActivity implements View.OnTouchLis
     public void agregarEmpleado(View v){
         Intent i = new Intent(this,Activity_agregar.class);
         startActivity(i);
+    }
+    public void guardarFiltro(String dato, int index){
+        datos[index] = dato;
     }
 
     @Override
