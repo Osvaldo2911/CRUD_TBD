@@ -12,16 +12,19 @@ import Modelo.UsuarioT;
 public interface usuarioDAO {
 
     @Query("SELECT * FROM UsuarioT WHERE userName=:email")
-    public List<UsuarioT> usuarioDisponible(String email);
+    public UsuarioT usuarioDisponible(String email);
 
+    @Query("SELECT * FROM UsuarioT WHERE userName=:email AND contraseña=:con")
+    public UsuarioT usuarioLogin(String email,String con);
+
+    @Insert
+    public void insertarUsuario(UsuarioT usuarioT);
 
 
     //@Query("SELECT * FROM UsuarioT WHERE userName=:nomUser AND contraseña=:contraseña")
    // public UsuarioT buscarUsuario(String nomUser, String contraseña);
 
     //Altas
-    //@Insert
-    //public void insertarUsuario(UsuarioT usuarioT);
 
    // @Query("delete from UsuarioT where userName=:user")
     //public void eliminarUsuario(String user);
