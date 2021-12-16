@@ -11,7 +11,16 @@ import Modelo.ClienteT;
 
 @Dao
 public interface clienteDAO {
-/*
+
+    @Query("SELECT * FROM ClienteT WHERE ClientNo LIKE '%'+ ClientNo=:clientNo + '%' " +
+            "AND fName LIKE '%'+fName=:fname + '%' " +
+            "AND lName LIKE '%'+lName=:lName +'%' " +
+            "AND telNo LIKE '%'+telNo=:telNo + '%'" +
+            "AND prefType LIKE '%'+prefType=:prefType + '%'" +
+            "AND maxRent LIKE '%'+maxRent=:maxRent + '%'")
+    public List<ClienteT> obtenerPersonalizado(String clientNo,String fname,String lName,String telNo,String prefType,String maxRent);
+
+    /*
     @Query("SELECT * FROM ClienteT WHERE clientNo=:clientNo")
     public ClienteT buscarCliente(String clientNo);
 

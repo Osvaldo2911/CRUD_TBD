@@ -1,282 +1,151 @@
 package com.example.crud_tbd;
 
-import androidx.annotation.IdRes;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class Activity_datos extends AppCompatActivity implements View.OnTouchListener {
-    TextView nom,ap,am,fn,dir,suel,sdni,dni,dno,sex,conteBus;
-    String nomf,apf,amf,fnf,dirf,suelf,sdnif,dnif,dnof,sexf;
-    boolean activo[] = {true,true,true,true,true,true,true,true,true,true,true};
-    Button agregar;
-    String[] datos = new String[9];
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import java.util.List;
+
+import ConexionBD.Conexion;
+import Modelo.ClienteT;
+
+public class Activity_datos extends AppCompatActivity {
+    TextView reDatos;
+    boolean[] activo = {true,true,true,true,true,true,true}; //En Conjunto con el metodo cambioBoton
+    String[] datos = new String[6]; //En Conjunto con el metodo cambioBoton
+    TextView nom,ap,clNo,tel,rmx,prtyp,filtro;
+    String noms,aps,clNos,tels,rmxs,prtyps;
+    EditText busquedaFiltro;
+    TextView btnBuscar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos);
 
-        TextView filOcultar = (TextView) findViewById(R.id.lbl_filtros);
-        ConstraintLayout contenedor = (ConstraintLayout) findViewById(R.id.cl_f_opciones);
-        ConstraintLayout contenedor2 = (ConstraintLayout) findViewById(R.id.cl_datos);
-        TextView ic = (TextView) findViewById(R.id.lbl_f_icono);
+
+        //---boton de regresar al inicio
+        reDatos = findViewById(R.id.lbl_Regresar);
+        regresar(reDatos);
+        //--->
+
+        //--- Cambio del estilo de boton al precionarlo
+        nom=findViewById(R.id.lbl_f_nom);
+        ap=findViewById(R.id.lbl_f_ap);
+        clNo=findViewById(R.id.lbl_f_sdni);
+        tel=findViewById(R.id.lbl_f_fn);
+        rmx=findViewById(R.id.lbl_f_am);
+        prtyp=findViewById(R.id.lbl_f_dir);
+        busquedaFiltro=findViewById(R.id.ed_busqueda_filtro);
+        filtro=findViewById(R.id.lbl_filtros);
+
+        noms = nom.getText().toString();
+        aps = ap.getText().toString();
+        clNos = clNo.getText().toString();
+        tels = tel.getText().toString();
+        rmxs = rmx.getText().toString();
+        prtyps = prtyp.getText().toString();
+
+        cambioBoton(nom,0,busquedaFiltro);
+        cambioBoton(ap,1,busquedaFiltro);
+        cambioBoton(clNo,2,busquedaFiltro);
+        cambioBoton(tel,3,busquedaFiltro);
+        cambioBoton(rmx,4,busquedaFiltro);
+        cambioBoton(prtyp,5,busquedaFiltro);
+
+
+        ConstraintLayout cl = findViewById(R.id.cl_f_opciones); //chico
+        TextView ic = findViewById(R.id.lbl_f_icono);
+        ConstraintLayout cl2 = findViewById(R.id.cl_datos);
+
         ic.setRotation(0);
-        contenedor2.setTranslationY(20);
-        contenedor.setVisibility(View.GONE);
+        cl2.setTranslationY(20);
+        cl.setVisibility(View.INVISIBLE);
 
-        conteBus = findViewById(R.id.ed_busqueda_filtro);
-        nom = findViewById(R.id.lbl_f_nom);
-        ap = findViewById(R.id.lbl_f_ap);
-        am = findViewById(R.id.lbl_f_am);
-        fn = findViewById(R.id.lbl_f_fn);
-        dir = findViewById(R.id.lbl_f_dir);
-        suel = findViewById(R.id.lbl_f_suel);
-        sdni = findViewById(R.id.lbl_f_sdni);
-        dni = findViewById(R.id.lbl_f_dni);
-        dno = findViewById(R.id.lbl_f_dno);
-        sex = findViewById(R.id.lbl_f_sex);
-
-        nom.setOnClickListener(new View.OnClickListener() {
+        // Mostrar seccion de filtros
+        filtro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (activo[0] == true){
-                    nom.setBackgroundResource(R.drawable.filtroa);
-                    nom.setTextColor(Color.WHITE);
-                    nomf = conteBus.getText().toString().trim();
-                    guardarFiltro(nomf,0);
-                    conteBus.setText("");
-
-                    activo[0] = false;
-                }else if(activo[0]==false){
-                    nom.setBackgroundResource(R.drawable.filtrob);
-                    nom.setTextColor(Color.BLACK);
-                    conteBus.setText(datos[0]);
-                    activo[0] = true;
-                }
-            }
-        });
-        //---
-        ap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (activo[1] == true){
-                    ap.setBackgroundResource(R.drawable.filtroa);
-                    ap.setTextColor(Color.WHITE);
-                    apf = conteBus.getText().toString().trim();
-                    guardarFiltro(apf,1);
-                    conteBus.setText("");
-                    activo[1] = false;
-                }else if(activo[1]==false){
-                    ap.setBackgroundResource(R.drawable.filtrob);
-                    ap.setTextColor(Color.BLACK);
-                    conteBus.setText(datos[1]);
-                    activo[1] = true;
-                }
-            }
-        });
-        //---
-        am.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (activo[2] == true){
-                    am.setBackgroundResource(R.drawable.filtroa);
-                    am.setTextColor(Color.WHITE);
-                    amf = conteBus.getText().toString().trim();
-                    guardarFiltro(amf,2);
-                    conteBus.setText("");
-                    conteBus.setText(datos[2]);
-                    activo[2] = false;
-                }else if(activo[2]==false){
-                    am.setBackgroundResource(R.drawable.filtrob);
-                    am.setTextColor(Color.BLACK);
-                    conteBus.setText(datos[2]);
-                    activo[2] = true;
-                }
-            }
-        });
-        //---
-        fn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (activo[3] == true){
-                    fn.setBackgroundResource(R.drawable.filtroa);
-                    fn.setTextColor(Color.WHITE);
-                    fnf = conteBus.getText().toString().trim();
-                    guardarFiltro(fnf,3);
-                    conteBus.setText("");
-                    activo[3] = false;
-                }else if(activo[3]==false){
-                    fn.setBackgroundResource(R.drawable.filtrob);
-                    fn.setTextColor(Color.BLACK);
-                    conteBus.setText(datos[3]);
-                    activo[3] = true;
-                }
-            }
-        });
-        //---
-        dir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (activo[4] == true){
-                    dir.setBackgroundResource(R.drawable.filtroa);
-                    dir.setTextColor(Color.WHITE);
-                    dirf = conteBus.getText().toString().trim();
-                    guardarFiltro(dirf,4);
-                    conteBus.setText("");
-                    activo[4] = false;
-                }else if(activo[4]==false){
-                    dir.setBackgroundResource(R.drawable.filtrob);
-                    dir.setTextColor(Color.BLACK);
-                    conteBus.setText(datos[4]);
-                    activo[4] = true;
-                }
-            }
-        });
-        //---
-        suel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (activo[5] == true){
-                    suel.setBackgroundResource(R.drawable.filtroa);
-                    suel.setTextColor(Color.WHITE);
-                    suelf = conteBus.getText().toString().trim();
-                    guardarFiltro(suelf,5);
-                    conteBus.setText("");
-                    activo[5] = false;
-                }else if(activo[5]==false){
-                    suel.setBackgroundResource(R.drawable.filtrob);
-                    suel.setTextColor(Color.BLACK);
-                    conteBus.setText(datos[5]);
-                    activo[5] = true;
-                }
-            }
-        });
-        //---
-        sdni.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (activo[6] == true){
-                    sdni.setBackgroundResource(R.drawable.filtroa);
-                    sdni.setTextColor(Color.WHITE);
-                    sdnif = conteBus.getText().toString().trim();
-                    guardarFiltro(sdnif,6);
-                    conteBus.setText("");
-                    activo[6] = false;
-                }else if(activo[6]==false){
-                    sdni.setBackgroundResource(R.drawable.filtrob);
-                    sdni.setTextColor(Color.BLACK);
-                    conteBus.setText(datos[6]);
-                    activo[6] = true;
-                }
-            }
-        });
-        //---
-        dni.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (activo[7] == true){
-                    dni.setBackgroundResource(R.drawable.filtroa);
-                    dni.setTextColor(Color.WHITE);
-                    dnif = conteBus.getText().toString().trim();
-                    guardarFiltro(dnif,7);
-                    conteBus.setText("");
-                    activo[7] = false;
-                }else if(activo[7]==false){
-                    dni.setBackgroundResource(R.drawable.filtrob);
-                    dni.setTextColor(Color.BLACK);
-                    conteBus.setText(datos[7]);
-                    activo[7] = true;
-                }
-            }
-        });
-        //---
-        dno.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (activo[8] == true){
-                    dno.setBackgroundResource(R.drawable.filtroa);
-                    dno.setTextColor(Color.WHITE);
-                    dnof = conteBus.getText().toString().trim();
-                    guardarFiltro(dnof,8);
-                    conteBus.setText("");
-                    activo[8] = false;
-                }else if(activo[8]==false){
-                    dno.setBackgroundResource(R.drawable.filtrob);
-                    dno.setTextColor(Color.BLACK);
-                    conteBus.setText(datos[8]);
-                    activo[8] = true;
-                }
-            }
-        });
-        //----
-        sex.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (activo[9] == true){
-                    sex.setBackgroundResource(R.drawable.filtroa);
-                    sex.setTextColor(Color.WHITE);
-                    sexf = conteBus.getText().toString().trim();
-                    guardarFiltro(sexf,9);
-                    conteBus.setText("");
-                    activo[9] = false;
-                }else if(activo[9]==false){
-                    sex.setBackgroundResource(R.drawable.filtrob);
-                    sex.setTextColor(Color.BLACK);
-                    conteBus.setText(datos[9]);
-                    activo[9] = true;
-                }
-            }
-        });
-//------------FILTRO OCULTAR -START
-
-        filOcultar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (activo[10] == false){
-                    contenedor.setVisibility(View.INVISIBLE);
-                    //contenedor.setTranslationX(1200);
-                    contenedor2.setTranslationY(20);
+                if (activo[6] == false){
+                    cl.setVisibility(View.INVISIBLE);
+                    cl2.setTranslationY(20);
                     ic.setRotation(0);
-
-                    activo[10] = true;
-                }else if(activo[10]==true){
-                    //contenedor.setTranslationX(0);
-                    contenedor2.setTranslationY(400);
-                   contenedor.setVisibility(View.VISIBLE);
-                    activo[10] = false;
+                    activo[6] = true;
+                }else if(activo[6]==true){
+                    cl2.setTranslationY(400);
+                    cl.setVisibility(View.VISIBLE);
+                    activo[6] = false;
                     ic.setRotation(90);
                 }
             }
         });
-//------------FILTRO OCULTAR -- END
-        //----regresa de pantalla
-        TextView regresar = (TextView) findViewById(R.id.lbl_Regresar);
-        regresar.setOnClickListener(new View.OnClickListener() {
+        //--->
+
+        btnBuscar=findViewById(R.id.lbl_buscarBTN);
+        buscar(btnBuscar);
+
+    } // fin constructor
+
+    public void cambioBoton(TextView boton,int index,EditText entradaSalida){
+
+        boton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (activo[index] == true){
+                    boton.setBackgroundResource(R.drawable.filtroa);
+                    boton.setTextColor(Color.WHITE);
+                    String cbS = entradaSalida.getText().toString().trim();
+                    datos[index] = cbS;
+                    entradaSalida.setText("");
+                    activo[index] = false;
+                }else if(activo[index]==false){
+                    boton.setBackgroundResource(R.drawable.filtrob);
+                    boton.setTextColor(Color.BLACK);
+                    entradaSalida.setText(datos[index]);
+                    activo[index] = true;
+                }
+            }
+        });
+    }
+
+
+
+    public void buscar(TextView tv){
+
+                tv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                        Conexion conexion = Conexion.gettAppDatabase(getBaseContext());
+                        List<ClienteT> resConsulta= conexion.clienteDAO().obtenerPersonalizado(noms,aps,clNos,tels,rmxs,prtyps);
+                        filtro.setText(resConsulta.toString());
+                            }
+                        }).start();
+
+                    }
+                });
+    }
+
+    public void regresar(TextView re){
+        re.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-
     }
-    public void agregarEmpleado(View v){
-        Intent i = new Intent(this,Activity_agregar.class);
+
+    public void agregarEmpleado(View v) {
+        Intent i = new Intent(this, Activity_agregar.class);
         startActivity(i);
     }
-    public void guardarFiltro(String dato, int index){
-        datos[index] = dato;
-    }
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-    return false;
-    }
 }
