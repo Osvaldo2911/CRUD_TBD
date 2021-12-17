@@ -176,21 +176,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lbl_nombreRegistro" />
 
-    <TextView
-        android:id="@+id/lbl_resultados"
-        android:layout_width="359dp"
-        android:layout_height="82dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="15dp"
-        android:fontFamily="@font/montserrat"
-        android:text="TextView"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/lbl_nbeL"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_registrar" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
