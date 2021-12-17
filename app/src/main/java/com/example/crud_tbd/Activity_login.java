@@ -50,10 +50,29 @@ public class Activity_login extends AppCompatActivity implements View.OnTouchLis
             if (!(userid.equals("")) && !(contra2.equals(""))){
                 UsuarioT busqueda = conexion.usuarioDAO().usuarioLogin(userid,contra2);
                 if(busqueda!=null){
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getBaseContext(), "Bienvenido", Toast.LENGTH_LONG).show();
+                        }
+                    }).start();
                     startActivity(i);
+                }else{
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getBaseContext(), "Correo electronico o contraseña erroneos", Toast.LENGTH_LONG).show();
+                        }
+                    }).start();
                 }
-
             }
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getBaseContext(), "Rellena todos los campos", Toast.LENGTH_LONG).show();
+                        }
+                    }).start();
+
             }
         }).start();
         }

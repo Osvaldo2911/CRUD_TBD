@@ -36,6 +36,7 @@
         android:layout_marginTop="12dp"
         android:background="@drawable/etfondo"
         android:ems="10"
+        android:digits="abcdefghijklmnopqrstuvwxyz !#$%'()*+,-./:;=?@[\]^_`{|}~ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
         android:fontFamily="@font/montserrat"
         android:hint="@string/hint_Contra"
         android:inputType="textPassword"

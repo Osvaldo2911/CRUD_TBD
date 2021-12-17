@@ -3,7 +3,7 @@
 
 
     <string name="lbl_logoNombre">AMPRICE</string>
-    <string name="lbl_nombreLogin">LOGIN</string>
+    <string name="lbl_nombreLogin">LIGIN ENGLICH</string>
 
 
     <string name="hint_Email">Correo electronico</string>
@@ -40,9 +40,5 @@
     <string name="text_eliminar">Eliminar</string>
     <string name="text_modificar">Modificar</string>
     <string name="text_agregarEm">Agregar Empleado</string>
-
-
-
-
 
 </resources>

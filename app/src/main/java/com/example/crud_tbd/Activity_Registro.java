@@ -158,6 +158,12 @@ public class Activity_Registro extends AppCompatActivity implements View.OnTouch
                             UsuarioT busqueda = conexion.usuarioDAO().usuarioDisponible(email);
 
                             if (busqueda == null){
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getBaseContext(), "Registro con exito", Toast.LENGTH_LONG).show();
+                                    }
+                                }).start();
                                 conexion.usuarioDAO().insertarUsuario(new UsuarioT(nom,email,cn));
                                 nombre.setText("");
                                 user.setText("");
@@ -171,19 +177,44 @@ public class Activity_Registro extends AppCompatActivity implements View.OnTouch
 
                             //--------------------------------------------------
                         }else{
-                            resultados.setText("terminos no aceptados");
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getBaseContext(), "Rellena los campos", Toast.LENGTH_LONG).show();
+                                }
+                            }).start();
                         }
                     }else{
-                        resultados.setText("contraseña confirmar vacio");
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getBaseContext(), "Rellena los campos", Toast.LENGTH_LONG).show();
+                            }
+                        }).start();
                     }
                 }else{
-                    resultados.setText("contraseña vacio");
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getBaseContext(), "Rellena los campos", Toast.LENGTH_LONG).show();
+                        }
+                    }).start();
                 }
             } else{
-                resultados.setText("email vacio");
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getBaseContext(), "Rellena los campos", Toast.LENGTH_LONG).show();
+                    }
+                }).start();
             }
         }else{
-            resultados.setText("nombre vacio");
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getBaseContext(), "Rellena los campos", Toast.LENGTH_LONG).show();
+                }
+            }).start();
         }
         // fin hilo
 
