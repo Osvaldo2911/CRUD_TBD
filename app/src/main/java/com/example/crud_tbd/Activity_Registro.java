@@ -135,7 +135,12 @@ public class Activity_Registro extends AppCompatActivity implements View.OnTouch
                                     new Thread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Toast.makeText(getBaseContext(), "Confirmar contraseña tiene errores", Toast.LENGTH_LONG).show();
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Toast.makeText(getBaseContext(), "Confirmar contraseña tiene errores", Toast.LENGTH_LONG).show();
+                                                }
+                                            });
                                         }
                                     }).start();
                                 }
@@ -146,7 +151,12 @@ public class Activity_Registro extends AppCompatActivity implements View.OnTouch
                                     new Thread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Toast.makeText(getBaseContext(), "Registro con exito", Toast.LENGTH_LONG).show();
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Toast.makeText(getBaseContext(), "Registro con exito", Toast.LENGTH_LONG).show();
+                                                }
+                                            });
                                         }
                                     }).start();
 
@@ -164,7 +174,12 @@ public class Activity_Registro extends AppCompatActivity implements View.OnTouch
                                     new Thread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Toast.makeText(getBaseContext(), "Correo en uso", Toast.LENGTH_LONG).show();
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Toast.makeText(getBaseContext(), "Email en uso", Toast.LENGTH_LONG).show();
+                                                }
+                                            });
                                         }
                                     }).start();
                                 }
@@ -175,7 +190,12 @@ public class Activity_Registro extends AppCompatActivity implements View.OnTouch
                             new Thread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(getBaseContext(), "Rellena los campos", Toast.LENGTH_LONG).show();
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getBaseContext(), "Rellena los campos", Toast.LENGTH_LONG).show();
+                                        }
+                                    });
                                 }
                             }).start();
                         }
@@ -183,7 +203,12 @@ public class Activity_Registro extends AppCompatActivity implements View.OnTouch
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(getBaseContext(), "Acepte los terminos y condiciones", Toast.LENGTH_LONG).show();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getBaseContext(), "Rellena los campos", Toast.LENGTH_LONG).show();
+                                    }
+                                });
                             }
                         }).start();
                     }
@@ -191,7 +216,12 @@ public class Activity_Registro extends AppCompatActivity implements View.OnTouch
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getBaseContext(), "Rellena los campos", Toast.LENGTH_LONG).show();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getBaseContext(), "Rellena los campos", Toast.LENGTH_LONG).show();
+                                }
+                            });
                         }
                     }).start();
                 }
@@ -199,17 +229,29 @@ public class Activity_Registro extends AppCompatActivity implements View.OnTouch
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getBaseContext(), "Rellena los campos", Toast.LENGTH_LONG).show();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getBaseContext(), "Rellena los campos", Toast.LENGTH_LONG).show();
+                            }
+                        });
                     }
                 }).start();
             }
         }else{
+
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getBaseContext(), "Rellena los campos", Toast.LENGTH_LONG).show();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getBaseContext(), "Rellena los campos", Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
             }).start();
+
         }
         // fin hilo
 
