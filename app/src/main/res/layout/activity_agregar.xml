@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bgc"
     android:backgroundTintMode="add"
+    android:onClick="modificar"
     tools:context=".Activity_agregar">
 
     <TextView
@@ -16,6 +17,7 @@
         android:layout_marginTop="84dp"
         android:background="@drawable/lblanco"
         android:clickable="true"
+        android:onClick="modificar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,13 +29,14 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="72dp"
         android:background="@drawable/etfondo"
+        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
         android:ems="10"
         android:hint="@string/hint_clID"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.027"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toBottomOf="@+id/lbl_titulo" />
 
     <TextView
         android:id="@+id/lbl_EliminarAE"
@@ -43,6 +46,7 @@
         android:layout_marginEnd="32dp"
         android:background="@drawable/bblanco"
         android:clickable="true"
+        android:onClick="borrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,13 +82,14 @@
         android:layout_marginTop="68dp"
         android:layout_marginEnd="72dp"
         android:background="@drawable/etfondo"
+        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
         android:ems="10"
         android:hint="@string/hint_clID"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toBottomOf="@+id/lbl_titulo" />
 
     <Button
         android:id="@+id/btn_ModificarCliente"
@@ -173,6 +178,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="72dp"
         android:background="@drawable/etfondo"
+        android:digits="1234567890"
         android:ems="10"
         android:hint="@string/text_tel"
         android:inputType="date"
@@ -189,6 +195,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="73dp"
         android:background="@drawable/etfondo"
+        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         android:ems="10"
         android:hint="@string/text_ap"
         android:inputType="textPersonName"
@@ -205,6 +212,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="72dp"
         android:background="@drawable/etfondo"
+        android:digits="1234567890"
         android:ems="10"
         android:hint="@string/text_rmax"
         android:inputType="number"
@@ -221,6 +229,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="72dp"
         android:background="@drawable/etfondo"
+        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         android:ems="10"
         android:hint="@string/hint_Nombre"
         android:inputType="textPersonName"
@@ -238,11 +247,11 @@
         android:background="@drawable/usuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintStart_toEndOf="@+id/lbl_titulo"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/lbl_titulo"
         android:layout_width="226dp"
         android:layout_height="37dp"
         android:layout_marginStart="44dp"

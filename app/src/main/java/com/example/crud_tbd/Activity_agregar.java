@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ConexionBD.Conexion;
 import Modelo.ClienteT;
@@ -19,8 +20,8 @@ public class Activity_agregar extends AppCompatActivity {
     String noms,aps,clNos,tels,rmxs;
     RadioButton rbf;
     RadioButton rbh;
-    TextView btneditar,btnborrar;
-    Boolean[] btn = {false,false};
+    TextView btneditar,btnborrar,titulo;
+    Boolean[] btn = {true,true};
     Button btn_agregarCliente,btn_EliminarCliente,btn_ModificarCliente;
 
     @Override
@@ -35,6 +36,7 @@ public class Activity_agregar extends AppCompatActivity {
         rmx=findViewById(R.id.et_Renta_max);
         rbf = findViewById(R.id.rb_flat);
         rbh = findViewById(R.id.rb_house);
+        titulo=findViewById(R.id.lbl_titulo);
 
         entrada = findViewById(R.id.et_clientNOBusqueda);
 
@@ -45,6 +47,11 @@ public class Activity_agregar extends AppCompatActivity {
         btn_ModificarCliente = findViewById(R.id.btn_ModificarCliente);
 
         TextView regresar = (TextView) findViewById(R.id.lbl_RegresarAgregar);
+
+        entrada.setEnabled(false);
+        btn_EliminarCliente.setEnabled(false);
+        btn_ModificarCliente.setEnabled(false);
+
         regresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,8 +135,30 @@ public class Activity_agregar extends AppCompatActivity {
                                     //--------------------------------------------------
                                     if (rbf.isChecked()){
                                         conexion.clienteDAO().insertarCliente(new ClienteT(clNos, noms, aps, tels, "flat", rmxs));
+                                        new Thread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        Toast.makeText(getBaseContext(), "Se agrego con exito", Toast.LENGTH_LONG).show();
+                                                    }
+                                                });
+                                            }
+                                        }).start();
                                     }else{
                                         conexion.clienteDAO().insertarCliente(new ClienteT(clNos, noms, aps, tels, "house", rmxs));
+                                        new Thread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        Toast.makeText(getBaseContext(), "Se agrego con exito", Toast.LENGTH_LONG).show();
+                                                    }
+                                                });
+                                            }
+                                        }).start();
                                     }
 
                                     nom.setText("");
@@ -139,12 +168,72 @@ public class Activity_agregar extends AppCompatActivity {
                                     rbf.setChecked(false);
                                     rbh.setChecked(false);
                                     rmx.setText("");
+                                }else{
+                                    new Thread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Toast.makeText(getBaseContext(), "Rellena los campos", Toast.LENGTH_LONG).show();
+                                                }
+                                            });
+                                        }
+                                    }).start();
                                 }
 
                                 //--------------------------------------------------
+                            }else {
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(getBaseContext(), "Rellena los campos", Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+                                    }
+                                }).start();
                             }
+                        }else{
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getBaseContext(), "Rellena los campos", Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+                                }
+                            }).start();
                         }
+                    }else {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getBaseContext(), "Rellena los campos", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                        }).start();
                     }
+                }else{
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getBaseContext(), "Rellena los campos", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+                    }).start();
                 }
                 //----------------------
             }
@@ -154,31 +243,33 @@ public class Activity_agregar extends AppCompatActivity {
     public void modificar (View v){
         if (btn[0] == true){
             btneditar.setBackgroundResource(R.drawable.lnegro);
+            titulo.setText("Modificar Empleado");
+            entrada.setEnabled(true);
             nom.setEnabled(true);
             ap.setEnabled(true);
             tel.setEnabled(true);
             rmx.setEnabled(true);
             rbf.setEnabled(true);
             rbh.setEnabled(true);
-           // clNo.setEnabled(true);
+            clNo.setEnabled(false);
             btn_agregarCliente.setEnabled(false);
             btn_EliminarCliente.setEnabled(false);
             btn_ModificarCliente.setEnabled(true);
-
-
             btn[0] = false;
         }else if(btn[0] ==false){
             btneditar.setBackgroundResource(R.drawable.lblanco);
-            clNo.setEnabled(false);
-            nom.setEnabled(false);
-            ap.setEnabled(false);
-            tel.setEnabled(false);
-            rmx.setEnabled(false);
-            rbf.setEnabled(false);
-            rbh.setEnabled(false);
+            titulo.setText("Agregar Empleado");
+            clNo.setText("");
+            nom.setText("");
+            ap.setText("");
+            tel.setText("");
+            rmx.setText("");
+            clNo.setEnabled(true);
             btn_agregarCliente.setEnabled(true);
-
-
+            entrada.setText("");
+            entrada.setEnabled(false);
+            btn_EliminarCliente.setEnabled(false);
+            btn_ModificarCliente.setEnabled(false);
             btn[0] = true;
         }
     }
@@ -192,6 +283,13 @@ public class Activity_agregar extends AppCompatActivity {
                 Conexion conexion = Conexion.gettAppDatabase(getBaseContext());
                 if(!(clNo.getText().toString().equals(""))){
                     conexion.clienteDAO().eliminarC(clNo.getText().toString());
+                    nom.setText("");
+                    ap.setText("");
+                    tel.setText("");
+                    clNo.setText("");
+                    rbf.setChecked(false);
+                    rbh.setChecked(false);
+                    rmx.setText("");
                 }
 
             }
@@ -202,36 +300,58 @@ public class Activity_agregar extends AppCompatActivity {
 
     public void ModificarCliente(View v){
 
+        Conexion conexion = Conexion.gettAppDatabase(getBaseContext());
+
         new Thread(new Runnable() {
             @Override
             public void run() {
 
-                Conexion conexion = Conexion.gettAppDatabase(getBaseContext());
-                if(!(clNo.getText().toString().equals(""))){
-                    String fla;
-                    if (rbf.isChecked()==true){
-                        fla=rbf.getText().toString().toLowerCase();
-                    }else{
-                        fla=rbh.getText().toString().toLowerCase();
-                    }
-                    conexion.clienteDAO().modificarC(
-                            clNo.getText().toString(),
-                            nom.getText().toString(),
-                            ap.getText().toString(),
-                            tel.getText().toString(),
-                            fla+"",
-                            rmx.getText().toString());
-/*
-                    nom.setText("");
-                    ap.setText("");
-                    tel.setText("");
-                    rmx.setText("");
-                    clNo.setText("");
-                    rbf.setChecked(false);
-                    rbh.setChecked(false);
-*/
-                }
+                if (!nom.equals("")) {
+                    if (!aps.equals("")) {
+                        if (!clNos.equals("")) {
+                            if (!(tels.equals(""))) {
+                                if (!(rmxs.equals(""))) {
+                                    if(!(clNo.getText().toString().equals(""))){
+                                        String fla;
+                                        if (rbf.isChecked()==true){
+                                            fla=rbf.getText().toString().toLowerCase();
+                                        }else{
+                                            fla=rbh.getText().toString().toLowerCase();
+                                        }
+                                        conexion.clienteDAO().modificarC(
+                                                clNo.getText().toString(),
+                                                nom.getText().toString(),
+                                                ap.getText().toString(),
+                                                tel.getText().toString(),
+                                                fla+"",
+                                                rmx.getText().toString());
 
+                                        nom.setText("");
+                                        ap.setText("");
+                                        tel.setText("");
+                                        clNo.setText("");
+                                        rbf.setChecked(false);
+                                        rbh.setChecked(false);
+                                        rmx.setText("");
+
+                                    }else{
+                                        new Thread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        Toast.makeText(getBaseContext(), "Rellena los campos", Toast.LENGTH_LONG).show();
+                                                    }
+                                                });
+                                            }
+                                        }).start();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }).start();
 
@@ -241,9 +361,33 @@ public class Activity_agregar extends AppCompatActivity {
     public void borrar (View v){
         if (btn[1] == true){
             btnborrar.setBackgroundResource(R.drawable.bnegro);
+            titulo.setText("Eliminar Empleado");
+            entrada.setEnabled(true);
+            nom.setEnabled(true);
+            ap.setEnabled(true);
+            tel.setEnabled(true);
+            rmx.setEnabled(true);
+            rbf.setEnabled(true);
+            rbh.setEnabled(true);
+            clNo.setEnabled(false);
+            btn_agregarCliente.setEnabled(false);
+            btn_EliminarCliente.setEnabled(true);
+            btn_ModificarCliente.setEnabled(false);
             btn[1] = false;
         }else if(btn[1] ==false){
             btnborrar.setBackgroundResource(R.drawable.bblanco);
+            titulo.setText("Agregar Empleado");
+            clNo.setText("");
+            nom.setText("");
+            ap.setText("");
+            tel.setText("");
+            rmx.setText("");
+            clNo.setEnabled(true);
+            entrada.setText("");
+            entrada.setEnabled(false);
+            btn_agregarCliente.setEnabled(true);
+            btn_EliminarCliente.setEnabled(false);
+            btn_ModificarCliente.setEnabled(false);
             btn[1] = true;
         }
     }

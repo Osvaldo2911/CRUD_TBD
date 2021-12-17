@@ -52,7 +52,7 @@ public abstract class Conexion extends RoomDatabase {
                     db.execSQL("INSERT INTO UsuarioT VALUES('admin','admin@.com','123')");
 
                     // Trigger
-                    db.execSQL("CREATE TRIGGER IF NOT EXISTS tg_historial_acciones BEFORE DELETE ON ClienteT BEGIN INSERT INTO HistorialT(cliente,nombre,apellido,tel) VALUES(old.cliente,old.nombre,old.apellido,old.tel); END;");
+                    db.execSQL("CREATE TRIGGER IF NOT EXISTS tg_historial_acciones BEFORE DELETE ON ClienteT BEGIN INSERT INTO HistorialT(clientNo,fName,lName,telNo) VALUES(old.clientNo,old.fName,old.lName,old.telNo); END;");
 
                     // Confirmar transaccion
                     db.execSQL("COMMIT");
