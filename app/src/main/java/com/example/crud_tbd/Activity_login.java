@@ -53,7 +53,12 @@ public class Activity_login extends AppCompatActivity implements View.OnTouchLis
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getBaseContext(), "Bienvenido", Toast.LENGTH_LONG).show();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getBaseContext(), "Bienvenido", Toast.LENGTH_LONG).show();
+                                }
+                            });
                         }
                     }).start();
                     startActivity(i);
@@ -61,19 +66,32 @@ public class Activity_login extends AppCompatActivity implements View.OnTouchLis
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getBaseContext(), "Correo electronico o contraseña erroneos", Toast.LENGTH_LONG).show();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getBaseContext(), "Correo o contraseña erroneos", Toast.LENGTH_LONG).show();
+                                }
+                            });
                         }
                     }).start();
                 }
-            }
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getBaseContext(), "Rellena todos los campos", Toast.LENGTH_LONG).show();
-                        }
-                    }).start();
+            }else {
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getBaseContext(), "Rellena todos los campos", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                }).start();
 
             }
+
+            } // end run Thread
         }).start();
         }
 
