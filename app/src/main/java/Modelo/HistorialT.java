@@ -7,29 +7,29 @@ import androidx.room.PrimaryKey;
 @Entity
 public class HistorialT {
     @NonNull
-    String usuario;
+    String apellido;
     @PrimaryKey
     @NonNull
     String cliente;
     @NonNull
-    String fechaYhora;
+    String nombre;
     @NonNull
-    String accion;
+    String tel;
 
-    public HistorialT(@NonNull String usuario, @NonNull String cliente, @NonNull String fechaYhora, @NonNull String accion) {
-        this.usuario = usuario;
+    public HistorialT(@NonNull String apellido, @NonNull String cliente, @NonNull String nombre, @NonNull String tel) {
+        this.apellido = apellido;
         this.cliente = cliente;
-        this.fechaYhora = fechaYhora;
-        this.accion = accion;
+        this.nombre = nombre;
+        this.tel = tel;
     }
 
     @NonNull
-    public String getUsuario() {
-        return usuario;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setUsuario(@NonNull String usuario) {
-        this.usuario = usuario;
+    public void setApellido(@NonNull String apellido) {
+        this.apellido = apellido;
     }
 
     @NonNull
@@ -42,20 +42,20 @@ public class HistorialT {
     }
 
     @NonNull
-    public String getFechaYhora() {
-        return fechaYhora;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setFechaYhora(@NonNull String fechaYhora) {
-        this.fechaYhora = fechaYhora;
+    public void setNombre(@NonNull String nombre) {
+        this.nombre = nombre;
     }
 
     @NonNull
-    public String getAccion() {
-        return accion;
+    public String getTel() {
+        return tel;
     }
 
-    public void setAccion(@NonNull String accion) {
-        this.accion = accion;
+    public void setTel(@NonNull String tel) {
+        this.tel = tel;
     }
 }

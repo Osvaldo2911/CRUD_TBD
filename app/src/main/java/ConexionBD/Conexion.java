@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.crud_tbd.R;
 
@@ -31,15 +32,13 @@ public abstract class Conexion extends RoomDatabase {
 
     private static Conexion INSTANCE;
 
-    //private static RoomDatabase.Callback CALLBACK = null;
+    private static RoomDatabase.Callback CALLBACK = null;
 
     public static Conexion gettAppDatabase(Context context){
+        if(INSTANCE==null) {
 
-        //*--*
-        if(INSTANCE==null){
-            //uso de transacciones
-                /*
-            CALLBACK = new RoomDatabase.Callback(){
+
+            CALLBACK = new RoomDatabase.Callback() {
                 @Override
                 public void onCreate(SupportSQLiteDatabase db) {
                     super.onCreate(db);
@@ -50,10 +49,10 @@ public abstract class Conexion extends RoomDatabase {
                     db.execSQL("BEGIN TRANSACTION");
 
                     // Creacion de usuario
-                    db.execSQL("INSERT INTO Usuario VALUES('f', 'f')");
+                    db.execSQL("INSERT INTO UsuarioT VALUES('admin','admin@.com','123')");
 
                     // Trigger
-                    db.execSQL("CREATE TRIGGER IF NOT EXISTS baja_respaldo BEFORE DELETE ON Region BEGIN INSERT INTO Respaldo(respaldoDesc) VALUES(old.regionDesc); END;");
+                    db.execSQL("CREATE TRIGGER IF NOT EXISTS tg_historial_acciones BEFORE DELETE ON ClienteT BEGIN INSERT INTO HistorialT(cliente,nombre,apellido,tel) VALUES(old.cliente,old.nombre,old.apellido,old.tel); END;");
 
                     // Confirmar transaccion
                     db.execSQL("COMMIT");
@@ -61,18 +60,10 @@ public abstract class Conexion extends RoomDatabase {
                     // -----------------------------------------
 
                 }
-
-                @Override
-                public void onOpen(SupportSQLiteDatabase db) {
-                    super.onOpen(db);
-                }
-            };*/
-
+            };
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                    Conexion.class,"@Dreamhome").build();
+                    Conexion.class,"@Dramhome").addCallback(CALLBACK).build();
         }
-        //*--*
-
      return INSTANCE;
     }
 

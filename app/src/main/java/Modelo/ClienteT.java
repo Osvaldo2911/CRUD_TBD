@@ -83,13 +83,7 @@ public class ClienteT {
 
     @Override
     public String toString() {
-        return "Cliente{" +
-                "clientNo='" + clientNo + '\'' +
-                ", fName='" + fName + '\'' +
-                ", lName='" + lName + '\'' +
-                ", telNo='" + telNo + '\'' +
-                ", prefType='" + prefType + '\'' +
-                ", maxRent='" + maxRent + '\'' +
-                '}';
+        return "\n\nclientNo= "+clientNo+"  fName= "+fName+"  lName= "+ lName +"\n" +
+                "telNo= " + telNo +"  prefType= " + prefType +"  maxRent= " + maxRent;
     }
 }
