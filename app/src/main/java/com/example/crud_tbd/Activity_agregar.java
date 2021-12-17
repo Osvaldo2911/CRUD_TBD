@@ -84,10 +84,8 @@ public class Activity_agregar extends AppCompatActivity {
                         clNo.setText(busqueda.getClientNo());
                         if (busqueda.getPrefType().toLowerCase().equals("flat")) {
                             rbf.setChecked(true);
-                            rbh.setChecked(false);
                         } else {
                             rbh.setChecked(true);
-                            rbf.setChecked(false);
                         }
 /*
                         nom.setEnabled(false);
@@ -306,7 +304,7 @@ public class Activity_agregar extends AppCompatActivity {
             @Override
             public void run() {
 
-                if (!nom.equals("")) {
+                if (!noms.equals("")) {
                     if (!aps.equals("")) {
                         if (!clNos.equals("")) {
                             if (!(tels.equals(""))) {
