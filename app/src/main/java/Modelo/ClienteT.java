@@ -10,9 +10,9 @@ public class ClienteT {
     @NonNull
     String clientNo;
     @NonNull
-    String fName;
+    public String fName;
     @NonNull
-    String lName;
+    public String lName;
     String telNo;
     @NonNull
     String prefType;

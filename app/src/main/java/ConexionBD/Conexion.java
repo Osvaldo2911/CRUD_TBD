@@ -1,10 +1,17 @@
 package ConexionBD;
 
 import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+
+import com.example.crud_tbd.R;
 
 import DAO.clienteDAO;
 import DAO.historialDAO;
@@ -73,4 +80,6 @@ public abstract class Conexion extends RoomDatabase {
         INSTANCE=null;
     }
 
+
 }
+

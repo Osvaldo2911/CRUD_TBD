@@ -54,8 +54,6 @@ public class Activity_login extends AppCompatActivity implements View.OnTouchLis
                 }
 
             }
-
-
             }
         }).start();
         }

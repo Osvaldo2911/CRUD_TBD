@@ -9,9 +9,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Arrays;
 import java.util.List;
 
+import ConexionBD.AdaptadorRegistros;
 import ConexionBD.Conexion;
 import Modelo.ClienteT;
 
@@ -22,12 +26,20 @@ public class Activity_datos extends AppCompatActivity {
     TextView nom,ap,clNo,tel,rmx,prtyp,filtro;
     String noms,aps,clNos,tels,rmxs,prtyps;
     EditText busquedaFiltro;
+    boolean[] btn = new boolean[2];
     TextView btnBuscar;
+
+    RecyclerView recicler;
+    RecyclerView.Adapter adaper;
+    RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos);
+
+        recicler=findViewById(R.id.rv_datosTabla);
+
 
 
         //---boton de regresar al inicio
@@ -45,12 +57,6 @@ public class Activity_datos extends AppCompatActivity {
         busquedaFiltro=findViewById(R.id.ed_busqueda_filtro);
         filtro=findViewById(R.id.lbl_filtros);
 
-        noms = nom.getText().toString();
-        aps = ap.getText().toString();
-        clNos = clNo.getText().toString();
-        tels = tel.getText().toString();
-        rmxs = rmx.getText().toString();
-        prtyps = prtyp.getText().toString();
 
         cambioBoton(nom,0,busquedaFiltro);
         cambioBoton(ap,1,busquedaFiltro);
@@ -88,9 +94,9 @@ public class Activity_datos extends AppCompatActivity {
         //--->
 
         btnBuscar=findViewById(R.id.lbl_buscarBTN);
-        buscar(btnBuscar);
 
     } // fin constructor
+
 
     public void cambioBoton(TextView boton,int index,EditText entradaSalida){
 
@@ -107,31 +113,24 @@ public class Activity_datos extends AppCompatActivity {
                 }else if(activo[index]==false){
                     boton.setBackgroundResource(R.drawable.filtrob);
                     boton.setTextColor(Color.BLACK);
-                    entradaSalida.setText(datos[index]);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    String[] b = new String[0];
+                                    adaper = new AdaptadorRegistros(b);
+                                    recicler.setAdapter(adaper);
+                                }
+                            });
+                        }
+                    }).start();
+                    //entradaSalida.setText(datos[index]);
                     activo[index] = true;
                 }
             }
         });
-    }
-
-
-
-    public void buscar(TextView tv){
-
-                tv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                        Conexion conexion = Conexion.gettAppDatabase(getBaseContext());
-                        List<ClienteT> resConsulta= conexion.clienteDAO().obtenerPersonalizado(noms,aps,clNos,tels,rmxs,prtyps);
-                        filtro.setText(resConsulta.toString());
-                            }
-                        }).start();
-
-                    }
-                });
     }
 
     public void regresar(TextView re){
@@ -146,6 +145,56 @@ public class Activity_datos extends AppCompatActivity {
     public void agregarEmpleado(View v) {
         Intent i = new Intent(this, Activity_agregar.class);
         startActivity(i);
+    }
+
+    public void conaulta(View v){
+        recicler.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recicler.setLayoutManager(layoutManager);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Conexion conexion = Conexion.gettAppDatabase(getBaseContext());
+
+                List<ClienteT> clientes = conexion.clienteDAO().obtenerPersonalizado("%"+datos[2]+"%","%"+ datos[0] +"%","%"+datos[1]+"%","%"+datos[3]+"%","%"+datos[5]+"%","%"+datos[4]+"%");
+
+                String[] a;
+
+                if (clientes.size()>0) {
+                    a = new String[clientes.size()];
+                    int Cont=0;
+                    for (ClienteT c:clientes) {
+                        a[Cont]=c.toString();
+                        Cont++;
+                    }
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            adaper = new AdaptadorRegistros(a);
+                            recicler.setAdapter(adaper);
+                        }
+                    });
+
+                }else{
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            String[] b = new String[0];
+                            adaper = new AdaptadorRegistros(b);
+                            recicler.setAdapter(adaper);
+                        }
+                    });
+                }
+
+
+
+
+
+
+            }
+        }).start();
     }
 
 }
